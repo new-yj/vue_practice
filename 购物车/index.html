@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>购物车</title>
+	<link rel="stylesheet" href="./main.css">
+</head>
+<body>
+	<div id="app" v-cloak>
+		<template v-if="list.length">
+			<table border="1">
+				<thead>
+					<tr>
+						<th>勾选</th>
+						<th>序号</th>
+						<th>商品名称</th>
+						<th>商品单价</th>
+						<th>购买数量</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item, index) in list">
+						<td>
+							<input @change="item.selected=!item.selected" type="checkbox" />
+						</td>
+						<td>{{index + 1}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.price}}</td>
+						<td>
+							<button @click="handleReduce(index)"
+									:disabled="item.count === 1">-</button>
+							{{item.count}}
+							<button @click="handleAdd(index)">+</button>
+						</td>
+						<td>
+							<button @click="handleRemove(index)">移除</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>总价：￥{{totalPrice}}</div>
+		</template>
+		<h3 v-else>购物车为空</h3>
+	</div>
+
+	<script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+	<script src="./main.js"></script>
+</body>
+</html>
