@@ -105,4 +105,82 @@ var event = new Vue({
 			window.alert(keyName);
 		}
 	}
-})
+});
+
+// 局部组件
+var localc = new Vue({
+	el: '#localc',
+	components: {
+		'my-component': {
+			template: '<h3>局部注册组件</h3>'
+		}
+	}
+});
+
+// 全局组件
+Vue.component('my-count', {
+	template: '<button @click="counter++">{{counter}}</button>',
+	data: function () {
+		return {counter: 0}
+	}
+});
+
+var globalc = new Vue({
+	el: '#globalc'
+});
+
+// 字符串数组props
+Vue.component('my-strarrprops', {
+	props: ['warningText', 'message'],		//驼峰式命名在DOM模板中使用时要改为短横分隔命名
+	template: '<div><h3>{{warningText}}</h3><div>{{message}}</div></div>'
+});
+
+var strarrprops = new Vue({
+	el: '#strarrprops',
+	data: {
+		parentMessage: ''
+	}
+});
+
+//对象props
+Vue.component('my-objprops', {
+	props: {
+		//必须是数字类型
+		propnum: Number,
+		// 必须是字符串或数字类型
+		proparr: [String, Number],
+		// 布尔值，如果没有定义则默认值为true
+		propboolean: {
+			type: Boolean,
+			default: true
+		},
+		// 数字值，必须有值
+		propnumr: {
+			type: Number,
+			required: true
+		},
+		// 数组或对象的默认值必须由一个函数来返回
+		proparrd: {
+			type: Array,
+			default: function () {
+				return [];
+			}
+		},
+		// 一个验证函数
+		propfunc: {
+			validator: function (value) {
+				return value > 10;
+			}
+		}
+		// String Number Boolean Object Array Function
+	},
+	template: '<h3>{{propnumr}}</h3>'
+});
+
+var objprops = new Vue({
+	el: '#objprops',
+	data: {
+		value: 10
+	}
+});
+

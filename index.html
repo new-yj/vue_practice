@@ -71,6 +71,35 @@
 		<hr />
 	</div>
 
+	<!-- 局部组件 -->
+	<div id="localc">
+		<my-component></my-component>
+		<table>
+			<tbody is="my-component"></tbody>
+		</table>
+		<hr />
+	</div>
+
+	<!-- 全局组件 -->
+	<div id="globalc">
+		<my-count></my-count>
+		<my-count></my-count>
+		<my-count></my-count>
+		<hr />
+	</div>
+
+	<!-- 字符串数组props -->
+	<div id="strarrprops">
+		<input type="text" v-model="parentMessage" />
+		<my-strarrprops :message="parentMessage" warning-text="提示信息"></my-strarrprops>
+		<hr />
+	</div>
+
+	<!-- 对象props -->
+	<div id="objprops">
+		<my-objprops :propnumr="value"></my-objprops>
+	</div>
+
 
 	<script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
 	<script src="./main.js"></script>
