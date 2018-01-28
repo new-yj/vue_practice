@@ -100,6 +100,29 @@
 		<my-objprops :propnumr="value"></my-objprops>
 	</div>
 
+	<!-- 自定义事件 -->
+	<div id="custom_event">
+		<p>总数：{{total}}</p>
+		<custom-event @increase="handleGetTotal"
+					@reduce="handleGetTotal"></custom-event>
+		<hr />
+	</div>
+
+	<!-- 双向绑定的v-model组件 -->
+	<div id='dvmodel'>
+		<h3>总数：{{total}}</h3>
+		<dbl-vmodel v-model="total"></dbl-vmodel>
+		<button @click="handleReduce">-1</button>
+		<hr />
+	</div>
+
+	<!-- bus实现组件间通信 -->
+	<div id="busc">
+		{{message}}
+		<bus-connect></bus-connect>
+		<hr />
+	</div>
+
 
 	<script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
 	<script src="./main.js"></script>

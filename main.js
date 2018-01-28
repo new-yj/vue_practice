@@ -184,3 +184,86 @@ var objprops = new Vue({
 	}
 });
 
+// 自定义事件
+Vue.component('custom-event', {
+	template: '\
+		<div>\
+			<button @click="handleIncrease">+1</button>\
+			<button @click="handleReduce">-1</button>\
+		</div>\
+	',
+	data: function () {
+		return {
+			counter: 0
+		}
+	},
+	methods: {
+		handleIncrease: function () {
+			this.counter++;
+			this.$emit('increase', this.counter);
+		},
+		handleReduce: function () {
+			this.counter--;
+			this.$emit('reduce', this.counter);
+		}
+	}
+});
+
+var custom_event = new Vue({
+	el: '#custom_event',
+	data: {
+		total: 0
+	},
+	methods: {
+		handleGetTotal: function (total) {
+			this.total = total;
+		}
+	}
+});
+
+// 双向绑定的v-model组件
+Vue.component('dbl-vmodel', {
+	props: ['value'],
+	template: '<input :value="value" @input="updateValue" type="number" />',
+	methods: {
+		updateValue: function (event) {
+			this.$emit('input', event.target.value);
+		}
+	}
+});
+
+var dvmodel = new Vue({
+	el: '#dvmodel',
+	data: {
+		total: 0
+	},
+	methods: {
+		handleReduce: function () {
+			this.total--;
+		}
+	}
+});
+
+// bus实现组件间通信
+var bus = new Vue();
+Vue.component('bus-connect', {
+	template: '<button @click="handleEvent">传递事件</button>',
+	methods: {
+		handleEvent: function () {
+			bus.$emit('on-message', '来自组件bus-connect的内容');
+		}
+	}
+});
+
+var busc = new Vue({
+	el: '#busc',
+	data: {
+		message: ''
+	},
+	mounted: function () {
+		var _this = this;
+		bus.$on('on-message', function (msg) {
+			_this.message = msg;
+		});
+	}
+});
