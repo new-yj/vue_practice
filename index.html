@@ -123,6 +123,52 @@
 		<hr />
 	</div>
 
+	<!-- $parent -->
+	<div id="parent">
+		{{message}}
+		<parent-c></parent-c>
+		<hr />
+	</div>
+
+	<!-- $ref -->
+	<div id="ref">
+		<button @click="handleRef">通过ref获取子组件实例</button>
+		<ref-c ref="com"></ref-c>
+		<hr />
+	</div>
+
+	<!-- slot -->
+	<div id="slot">
+		<slot-c>
+			<p>分发的内容</p>
+			<p>更多分发的内容</p>
+		</slot-c>
+		<hr />
+	</div>
+
+	<!-- name slot -->
+	<div id="nameSlot">
+		<name-slot>
+			<h2 slot="header">标题</h2>
+			<p>正文内容</p>
+			<p>更多的正文内容</p>
+			<div slot="footer">底部信息</div>
+			<p>test</p>
+		</name-slot>
+		<hr />
+	</div>
+
+	<!-- listSlot -->
+	<div id="listSlot">
+		<list-slot :books="books">
+			<!-- 作用域插槽也可以是具名的Slot -->
+			<template slot="book" slot-scope="props">
+				<li>{{props.bookName}}</li>
+			</template>
+		</list-slot>
+	</div>
+
+
 
 	<script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
 	<script src="./main.js"></script>

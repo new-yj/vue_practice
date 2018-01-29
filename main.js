@@ -267,3 +267,114 @@ var busc = new Vue({
 		});
 	}
 });
+
+// $parent
+Vue.component('parent-c',{
+	template: '<button @click="handleEvent">通过父链直接修改数据</button>',
+	methods: {
+		handleEvent: function () {
+			this.$parent.message = '来自组件parent-c的内容';
+		}
+	}
+});
+
+var parnet = new Vue({
+	el: '#parent',
+	data: {
+		message: ''
+	}
+});
+
+// $ref
+Vue.component('ref-c', {
+	template: '<div>子组件</div>',
+	data: function () {
+		return {
+			message: '子组件内容'
+		}
+	}
+});
+
+var ref = new Vue({
+	el: '#ref',
+	methods: {
+		handleRef: function () {
+			// 通过$refs来访问指定的实例
+			var msg = this.$refs.com.message;
+			console.log(msg);
+		}
+	}
+});
+
+// slot
+Vue.component('slot-c', {
+	template: '\
+		<div>\
+			<slot>\
+				<p>如果父组件没有插入内容，我便作为默认内容出现</p>\
+			</slot>\
+		</div>'
+});
+
+var slot = new Vue({
+	el: '#slot'
+})
+
+// name slot
+Vue.component('name-slot', {
+	template: '\
+		<div class="container">\
+			<div class="header">\
+				<slot name="header"></slot>\
+			</div>\
+			<div class="main">\
+				<slot></slot>\
+			</div>\
+			<div class="footer">\
+				<slot name="footer"></slot>\
+			</div>\
+		</div>',
+	mounted: function () {
+		var header = this.$slots.header;
+		var main = this.$slots.default;
+		var footer = this.$slots.footer;
+		console.log('header ' + header);
+		console.log('main ' + main);
+		console.log('footer ' + footer);
+		console.log(footer[0].elm.innerHTML);
+	}
+});
+
+var nameSlot = new Vue({
+	el: '#nameSlot'
+});
+
+// listSlot
+Vue.component('list-slot', {
+	props: {
+		books: {
+			type: Array,
+			default: function () {
+				return [];
+			}
+		}
+	},
+	template: '\
+		<ul>\
+			<slot name="book" v-for="book in books"\
+				:book-name="book.name">\
+				// 这里可以写默认内容\
+			</slot>\
+		</ul>'
+});
+
+var listSlot = new Vue({
+	el: '#listSlot',
+	data: {
+		books: [
+			{ name: '《Vue.js 实战》' },
+			{ name: '《Javascript 语言精粹》'},
+			{ name: '《Javascript 高级程序设计》'}
+		]
+	}
+});

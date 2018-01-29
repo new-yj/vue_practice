@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge, chrome=1">
+    <title>组件高级用法</title>
+</head>
+<body>
+    <!-- 递归组件 -->
+    <div id="recursion">
+        <recursion-c :count="1"></recursion-c>
+    </div>
+
+    <!-- 内联模板 -->
+    <div id="inline">
+        <!-- 添加了inline-template属性 -->
+        <inline-c inline-template>
+            <div>
+                <h2>在父组件中定义子组件的模板</h2>
+                <p>{{msg}}</p>
+                <p>{{$parent.message}}</p>
+            </div>
+        </inline-c>
+    </div>
+    
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>
