@@ -32,3 +32,27 @@ var inline = new Vue({
         message: '在父组件中的数据'
     }
 });
+
+// component组件
+var componentc = new Vue({
+    el: '#componentc',
+    components: {
+        comA: {
+            template: '<div>组件A</div>'
+        },
+        comB: {
+            template: '<div>组件B</div>'
+        },
+        comC: {
+            template: '<div>组件C</div>'
+        }
+    },
+    data: {
+        currentView: 'comA'
+    },
+    methods: {
+        handleChangeView: function (component) {
+            this.currentView = 'com' + component;
+        }
+    }
+});

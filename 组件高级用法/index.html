@@ -23,6 +23,14 @@
             </div>
         </inline-c>
     </div>
+
+    <!-- component组件 -->
+    <div id="componentc">
+        <component :is="currentView"></component>
+        <button @click="handleChangeView('A')">切换到A</button>
+        <button @click="handleChangeView('B')">切换到B</button>
+        <button @click="handleChangeView('C')">切换到C</button>
+    </div>
     
     <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
     <script src="./main.js"></script>
