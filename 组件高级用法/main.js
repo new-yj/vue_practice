@@ -56,3 +56,47 @@ var componentc = new Vue({
         }
     }
 });
+
+// $nextTick
+var nextTick = new Vue({
+    el: '#nextTick',
+    data: {
+        showDiv: false
+    },
+    methods: {
+        getText: function () {
+            this.showDiv = true;
+            this.$nextTick(function () {
+                var text = document.getElementById('div').innerText;
+                console.log(text);
+            });
+        }
+    }
+});
+
+// x-template
+Vue.component('template-x', {
+    template: '#template-x'
+});
+
+var templatex = new Vue({
+    el: '#xtemplate'
+});
+
+// 手动挂载实例
+var MyComponent = Vue.extend({
+    template: '<div>Hello: {{name}}</div>',
+    data: function () {
+        return {
+            name: 'yj'
+        }
+    }
+});
+// new MyComponent().$mount('#mount-div');
+
+// new MyComponent({
+//     el: '#mount-div'
+// })
+
+var component = new MyComponent().$mount();
+document.getElementById('mount-div').appendChild(component.$el);

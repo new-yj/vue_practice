@@ -10,6 +10,7 @@
     <!-- 递归组件 -->
     <div id="recursion">
         <recursion-c :count="1"></recursion-c>
+        <hr />
     </div>
 
     <!-- 内联模板 -->
@@ -22,6 +23,7 @@
                 <p>{{$parent.message}}</p>
             </div>
         </inline-c>
+        <hr />
     </div>
 
     <!-- component组件 -->
@@ -30,6 +32,28 @@
         <button @click="handleChangeView('A')">切换到A</button>
         <button @click="handleChangeView('B')">切换到B</button>
         <button @click="handleChangeView('C')">切换到C</button>
+        <hr />
+    </div>
+
+    <!-- $nextTick -->
+    <div id="nextTick">
+        <div id="div" v-if="showDiv">这是一段文本</div>
+        <button @click="getText">获取div内容</button>
+        <hr />
+    </div>
+
+    <!-- x-template -->
+    <div id="xtemplate">
+        <template-x></template-x>
+        <script type="text/x-template" id="template-x">
+            <div>这里是组件内容</div>
+        </script>
+        <hr />
+    </div>
+
+    <!-- 手动挂载实例 -->
+    <div id="mount-div">
+
     </div>
     
     <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
