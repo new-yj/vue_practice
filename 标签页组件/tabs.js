@@ -62,8 +62,8 @@ Vue.component('tabs', {
             var nav = this.navList[index];
             var name = nav.name;
             this.currentValue = name;
-            this.$emit('input', name);
-            this.$emit('on-click', name);
+            // this.$emit('input', name);
+            // this.$emit('on-click', name);
         }
     },
     watch: {
